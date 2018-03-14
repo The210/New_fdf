@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 22:12:54 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/06 22:58:06 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:13:07 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 91) // 8 rotate x
 	{
 		*matrix = init_temps(*matrix);
-	//	matrix->thetax += 3.14/360 * matrix->v;
+		//	matrix->thetax += 3.14/360 * matrix->v;
 		matrix->TMatx1 = 1;
 		matrix->TMatx2 = 0;
 		matrix->TMatx3 = 0;
@@ -73,7 +73,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 84) // 2 rotate x
 	{
 		*matrix = init_temps(*matrix);
-	//	matrix->thetax -= 3.14/360 * matrix->v;
+		//	matrix->thetax -= 3.14/360 * matrix->v;
 		matrix->TMatx1 = 1;
 		matrix->TMatx2 = 0;
 		matrix->TMatx3 = 0;
@@ -100,7 +100,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 88) //6
 	{
 		*matrix = init_temps(*matrix);
-	//	matrix->thetay += 3.14/360 * matrix->v;
+		//	matrix->thetay += 3.14/360 * matrix->v;
 		matrix->TMaty2 = 1;
 		matrix->TMaty1 = 0;
 		matrix->TMaty3 = 0;
@@ -123,8 +123,6 @@ int	interactive(int	keycode, t_matrix *matrix)
 		close(matrix->fd);
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
-
-
 	}
 	if (keycode == 86) //4
 	{
@@ -156,7 +154,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 92) //9
 	{
 		*matrix = init_temps(*matrix);
-	//	matrix->thetaz += 3.14/360 * matrix->v;
+		//	matrix->thetaz += 3.14/360 * matrix->v;
 		matrix->TMatz3 = 1;
 		matrix->TMatz2 = 0;
 		matrix->TMatz1 = 0;
@@ -206,7 +204,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 13)//w
+	if (keycode == 13)//w
 	{
 		matrix->b -= 0.40 * matrix->v;
 		matrix->img = mk_image(*matrix);
@@ -214,7 +212,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 0)//a
+	if (keycode == 0)//a
 	{
 		matrix->a -= 0.40 *matrix->v;
 		matrix->img = mk_image(*matrix);
@@ -222,7 +220,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 12)//q
+	if (keycode == 12)//q
 	{
 		matrix->b -= 0.40 * matrix->v;
 		matrix->a -= 0.40 * matrix->v;
@@ -231,7 +229,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 8)//c
+	if (keycode == 8)//c
 	{
 		matrix->b += 0.40 * matrix->v;
 		matrix->a += 0.40 * matrix->v;
@@ -240,7 +238,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 1)//s
+	if (keycode == 1)//s
 	{
 		matrix->b += 0.40 * matrix->v;
 		matrix->img = mk_image(*matrix);
@@ -248,7 +246,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 6)//z
+	if (keycode == 6)//z
 	{
 		matrix->b += 0.40 * matrix->v;
 		matrix->a -= 0.40 * matrix->v;
@@ -257,7 +255,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 14)//e
+	if (keycode == 14)//e
 	{
 		matrix->b -= 0.40 * matrix->v;
 		matrix->a += 0.40 * matrix->v;
@@ -266,7 +264,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 15)//r
+	if (keycode == 15)//r
 	{
 		matrix->c += 0.20 * matrix->v;
 		matrix->img = mk_image(*matrix);
@@ -274,7 +272,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 3)//f
+	if (keycode == 3)//f
 	{
 		matrix->c -= 0.20 * matrix->v;
 		matrix->img = mk_image(*matrix);
@@ -282,7 +280,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 2)//d
+	if (keycode == 2)//d
 	{
 		matrix->a += 0.40 * matrix->v;
 		matrix->img = mk_image(*matrix);
@@ -290,7 +288,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 69)//+
+	if (keycode == 69)//+
 	{
 		matrix->alt += 0.1;
 		matrix->img = mk_image(*matrix);
@@ -298,7 +296,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-	if(keycode == 78)//-
+	if (keycode == 78)//-
 	{
 		matrix->alt -= 0.1;
 		matrix->img = mk_image(*matrix);
@@ -306,5 +304,38 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
+	if (keycode == 126)// up
+	{
+		matrix->posy -= 20;
+		matrix->img = mk_image(*matrix);
+		close(matrix->fd);
+		matrix->fd = open(matrix->av, O_RDONLY);
+		fdf(*matrix);
+	}
+	if (keycode == 125)// down
+	{
+		matrix->posy += 20;
+		matrix->img = mk_image(*matrix);
+		close(matrix->fd);
+		matrix->fd = open(matrix->av, O_RDONLY);
+		fdf(*matrix);
+	}
+	if (keycode == 123)// left
+	{
+		matrix->posx -= 20;
+		matrix->img = mk_image(*matrix);
+		close(matrix->fd);
+		matrix->fd = open(matrix->av, O_RDONLY);
+		fdf(*matrix);
+	}
+	if (keycode == 124)// right
+	{
+		matrix->posx += 20;
+		matrix->img = mk_image(*matrix);
+		close(matrix->fd);
+		matrix->fd = open(matrix->av, O_RDONLY);
+		fdf(*matrix);
+	}
+
 	return (0);
 }

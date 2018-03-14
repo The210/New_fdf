@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/18 18:03:58 by smerelo           #+#    #+#             */
-/*   Updated: 2018/03/05 04:18:18 by dhorvill         ###   ########.fr       */
+/*   Created: 2018/03/13 21:53:12 by dhorvill          #+#    #+#             */
+/*   Updated: 2018/03/14 00:27:43 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
@@ -73,6 +74,8 @@ typedef struct s_matrix
 	float		v;
 	int			posx;
 	int			posy;
+	int			col;
+	char		**map;
 }				t_matrix;
 
 typedef struct s_mlx
@@ -82,4 +85,5 @@ typedef struct s_mlx
 int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string);
 int		interactive(int keycode, t_matrix *matrix);
 int		fdf(t_matrix matrix);
+char	**get_map(int fd);
 #endif
