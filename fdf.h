@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:53:12 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/26 21:23:53 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/26 23:20:14 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_matrix
 	char		**map;
 	int			flag;
 	int			distance;
+	int			num_num;
+	int			*num_col;
 }				t_matrix;
 
 typedef struct s_mlx

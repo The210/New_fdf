@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:36:18 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/26 21:24:23 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/26 23:23:10 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int num_len(char *map, char c)
 	return (count + 1);
 }
 
-t_matrix	get_lines(int fd, char *argv, t_matrix matrix)
+/*t_matrix	get_lines(char *argv, t_matrix matrix)
 {
 	int i;
 	int curr_length;
@@ -48,22 +48,62 @@ t_matrix	get_lines(int fd, char *argv, t_matrix matrix)
 
 	i = 0;
 	prev_length = 0;
-	while (get_next_line(fd, &map) > 0)
+	while (get_next_line(matrix.fd, &map) > 0)
 	{
 		curr_length = num_len(map, ' ');
+		//matrix.col_line[i] = curr_length;
 		if (prev_length != curr_length && i != 0)
 		{
-		//	matrix.flag = 1;
-	//		return (matrix);
+			matrix.flag = 1;
+			ft_putendl("Error: invalid map");
+			return (matrix);
 		}
 		prev_length = curr_length;
 		ft_strdel(&map);
 		i++;
 	}
-	close(fd);
-	fd = open(argv, O_RDONLY);
+	close(matrix.fd);
+	matrix.fd = open(argv, O_RDONLY);
 	matrix.lines = i;
 	matrix.col = curr_length;
+	return (matrix);
+}*/
+
+t_matrix	get_lines(char *argv, t_matrix matrix)
+{
+	int i;
+	int	length;
+	char	*map;
+
+	i = 0;
+	matrix.num_num = 0;
+	while (get_next_line(matrix.fd, &map) > 0)
+	{
+		length = num_len(map, ' ');
+		ft_strdel(&map);
+		i++;
+	}
+	close(matrix.fd);
+	matrix.fd = open(argv, O_RDONLY);
+	matrix.lines = i;
+	if ((matrix.num_col = (int*)malloc(sizeof(int*) * (i + 1))) == 0)
+	{
+		matrix.flag = 1;
+		return(matrix);
+	}
+	matrix.num_col[i] = '\0';
+	i = 0;
+	while (get_next_line(matrix.fd, &map) > 0)
+	{
+		length = num_len(map, ' ');
+		ft_strdel(&map);
+		matrix.num_col[i] = length;
+		matrix.num_num += length;
+		i++;
+	}
+	close(matrix.fd);
+	matrix.fd = open(argv, O_RDONLY);
+	matrix.col = length;
 	return (matrix);
 }
 
@@ -84,25 +124,17 @@ float				get_nbr(char *map)
 
 t_coord		map_2d(float x, float y, float z, t_coord point, t_matrix matrix)
 {
-	int f;
 	float tempx;
 	float tempy;
 
 	tempy = y;
 	tempx = x;
-	f = 0;
-
-	if (z == 0)
-		z += 1;
-	//tempy = (y + 1) / z;
-	//tempx =  (x + 1) / z;
-	point.x = (matrix.Matx1 * tempx + matrix.Matx2 * tempy + matrix.Matx3 * z) * (matrix.distance / (matrix.col + matrix.lines));
-	point.y = (matrix.Maty1 * tempx+ matrix.Maty2 * tempy + matrix.Maty3 * z) * (matrix.distance / (matrix.col + matrix.lines));
-//	point.z = (matrix.Matz1 * tempx + matrix.Matz2 * tempy + matrix.Matz3 * z); 
+	point.x = (matrix.Matx1 * tempx + matrix.Matx2 * tempy + matrix.Matx3 * z) * (matrix.distance / (matrix.num_num / matrix.lines));
+	point.y = (matrix.Maty1 * tempx+ matrix.Maty2 * tempy + matrix.Maty3 * z) * (matrix.distance / (matrix.num_num / matrix.lines));
 	return (point);
 }
 
-void	draw_across(t_matrix matrix, t_coord point, t_coord next_point)
+/*void	draw_across(t_matrix matrix, t_coord point, t_coord next_point)
 {
 	int x;
 	int y;
@@ -111,26 +143,19 @@ void	draw_across(t_matrix matrix, t_coord point, t_coord next_point)
 	y = 0;
 	while (matrix.map[x])
 	{
-	//	ft_putstr("beginning x: ");
-	//	ft_putnbrl(x);
 		while(matrix.lines * matrix.col >= x && (x % matrix.col != 0 || x == 0))
 		{
-	//		ft_putendl("STARTS");
 			point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
 			x++;
-		//	ft_putnbrl(x);
 			next_point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt +2 +matrix.c, point, matrix);
-			//ft_putendl("Assigns points");
-			//ft_putstr("point.x: " );
-			//ft_putnbrl(point.x);
 			ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2 + matrix.c * -1, (get_nbr(matrix.map[x - 2])) / 50 * matrix.alt * -1, 1 * matrix.alt + 2 + matrix.c);
-		//	ft_putendl("ENDS");
 		}
 		y++;
-	//	if (x <= matrix.col * matrix.lines)
 			x++;
 	}
-}
+}*/
+
+void	draw_across(t_matrixmatrix, t_coord point, t_coord next_point);
 
 void	draw_columns(t_matrix matrix, t_coord point, t_coord next_point)
 {
@@ -213,15 +238,21 @@ int		main(int ac, char **av)
 	matrix.distance = 1000;
 	matrix.TMatz3 = 0;
 	matrix.av = av[1];
-	matrix.fd = open(av[1], O_RDONLY);
+	if ((matrix.fd = open(av[1], O_RDONLY)) < 0)
+	{
+		ft_putendl("Error: Read failed");
+		return (0);
+	}
 	matrix.mlx = mlx_init();
 	matrix.win = mlx_new_window(matrix.mlx, 2000, 1400, "TrueFDF");
 	matrix.img = mlx_new_image(matrix.mlx, 2000, 2000);
 	matrix.img_string = (int*)mlx_get_data_addr(matrix.img, &(matrix.bpp), &(matrix.s_l), &(matrix.endian));
-	matrix = get_lines(matrix.fd, av[1], matrix);
+	matrix = get_lines(av[1], matrix);
 	matrix.map = get_map(matrix.fd);
 	close(matrix.fd);
 	matrix.fd = open(av[1], O_RDONLY);
+	if (matrix.flag == 1)
+		return (0);
 	ft_putnbrl(matrix.col);
 	ft_putnbrl(matrix.lines);
 	ft_putnbrl(matrix.col * matrix.lines);
