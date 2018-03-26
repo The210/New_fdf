@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug.c                                         :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/06 16:34:46 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/06 16:57:37 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/09/05 15:05:24 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/09/09 11:38:29 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_strdebug(char *s, char *name)
+int	ft_is_prime(int nb)
 {
-	write(1, "\x1b[33m ***DEBUG*** ", 19);
-	write(1, "\x1b[0m", 5);
-	ft_putstr(name);
-	write(1, " is '", 5);
-	ft_putstr(s);
-	write(1, "'\n", 2);
+	int a;
+	int b;
+
+	a = 2;
+	b = 0;
+	if (nb <= 1)
+		b = 1;
+	while ((a * a) <= nb)
+	{
+		if (nb % a == 0)
+			b = 1;
+		a++;
+	}
+	if (b == 0)
+		return (1);
+	else
+		return (0);
 }

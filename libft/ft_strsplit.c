@@ -3,76 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 11:35:16 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/07 11:42:25 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/11/09 22:36:51 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/14 17:30:28 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	c_count(const char *s, char c)
+static int	nbw(char *s, char c)
 {
-	int	count;
-	int	is_word;
+	int i;
+	int sym;
+	int count;
 
-	is_word = 0;
+	i = 0;
+	sym = 0;
 	count = 0;
-	while (*s)
+	if (!s)
+		return (0);
+	while (s[i])
 	{
-		if (*s != c && is_word == 0)
+		while (s[i] != c && s[i])
 		{
-			is_word = 1;
-			count++;
-			while (*s != c)
-				s++;
+			sym = 1;
+			i++;
 		}
-		while (*s == c)
+		while (s[i] == c && s[i])
 		{
-			is_word = 0;
-			s++;
+			count += sym;
+			sym = 0;
+			i++;
 		}
+	}
+	return (count + 2);
+}
+
+static int	nbc(char *s, int i, char c)
+{
+	int count;
+
+	count = 0;
+	while (s[i] != c && s[i])
+	{
+		count++;
+		i++;
 	}
 	return (count + 1);
 }
 
-static int	allocate_length(char **split, const char *s, char c, int i)
+char		**ft_strsplit(const char *s, char c)
 {
-	int	count;
-
-	count = 0;
-	while (s[count] != c && s[count] != '\0')
-		count++;
-	if (!(split[i] = (char *)malloc(sizeof(char) * count + 1)))
-		return (0);
-	return (1);
-}
-
-char		**ft_strsplit(char const *s, char c)
-{
-	char	**t;
+	char	**res;
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
-	if (s == NULL || !(t = (char **)malloc(sizeof(char *) * (c_count(s, c)))))
+	j = 0;
+	s = ft_strtrimc(s, c);
+	if (!s || !(res = malloc(sizeof(char*) * nbw((char*)s, c))))
 		return (NULL);
-	while (*s)
+	while (s[i])
 	{
-		j = 0;
-		while (*s == c)
-			s++;
-		if (*s != '\0')
-		{
-			if (!allocate_length(t, s, c, i))
-				return (NULL);
-			while (*s != c && *s != '\0')
-				t[i][j++] = *s++;
-			t[i][j] = '\0';
+		k = 0;
+		if (!(res[j] = malloc(sizeof(c) * nbc((char*)s, i, c))))
+			return (NULL);
+		while (s[i] != c && s[i])
+			res[j][k++] = s[i++];
+		while (s[i] == c && s[i])
 			i++;
-		}
+		res[j++][k] = '\0';
 	}
-	t[i] = 0;
-	return (t);
+	res[j] = NULL;
+	return (res);
 }

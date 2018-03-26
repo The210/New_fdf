@@ -3,48 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 10:37:32 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/07 19:13:12 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/11/13 16:16:37 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/13 16:48:04 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	*ft_memdup(void const *content, size_t n)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	unsigned long	i;
-	char			*b;
-	char			*a;
+	t_list	*new;
 
-	a = (char *)content;
-	if (!(b = (char *)malloc(sizeof(char) * n)))
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		b[i] = a[i];
-		i++;
-	}
-	return ((void *)b);
-}
-
-t_list		*ft_lstnew(void const *content, size_t content_size)
-{
-	t_list *tmp;
-
-	if (!(tmp = (t_list *)malloc(sizeof(t_list))))
+	if ((new = (t_list *)malloc(sizeof(*new))) == NULL)
 		return (NULL);
 	if (content == NULL)
 	{
-		tmp->content = NULL;
-		tmp->content_size = 0;
-		tmp->next = NULL;
-		return (tmp);
+		new->content = NULL;
+		new->content_size = 0;
 	}
-	tmp->content = ft_memdup(content, content_size);
-	tmp->content_size = content_size;
-	tmp->next = NULL;
-	return (tmp);
+	else
+	{
+		if ((new->content = malloc(content_size)) == NULL)
+		{
+			free(new);
+			return (NULL);
+		}
+		ft_memcpy(new->content, content, content_size);
+		new->content_size = content_size;
+	}
+	new->next = NULL;
+	return (new);
 }

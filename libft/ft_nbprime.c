@@ -1,58 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbrl.c                                       :+:      :+:    :+:   */
+/*   ft_nbisprime.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 22:32:14 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/13 22:32:42 by dhorvill         ###   ########.fr       */
+/*   Created: 2017/11/12 15:40:16 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/13 17:27:48 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		puis(int no, int i)
+static void	ft_afficheprime(int *j)
 {
-	int x;
-	int y;
+	int i;
 
-	x = 1;
-	y = 1;
-	while (y <= i)
+	i = 0;
+	while (j[i] != '\0')
 	{
-		x *= no;
-		y++;
+		ft_putnbr(j[i]);
+		ft_putchar('\n');
+		i++;
 	}
-	return (x);
 }
 
-void			ft_putnbrl(int nb)
+int			*ft_nbprime(int nb)
 {
-	int	count;
-	int n;
+	int i;
+	int k;
+	int *j;
 
-	count = 1;
-	if (nb == 0)
-		ft_putchar('0');
-	if (nb == -2147483648)
+	i = -1;
+	k = 0;
+	while (++i <= nb)
 	{
-		ft_putchar('-');
-		ft_putchar('2');
-		nb = (nb * -1) - 2000000000;
+		if (ft_is_prime(i) == 1)
+			k++;
 	}
-	if (nb < 0)
+	if ((j = (int*)malloc(sizeof(int) * (k + 1))) == 0)
+		return (NULL);
+	i = -1;
+	k = 0;
+	while (++i <= nb)
 	{
-		ft_putchar('-');
-		nb *= -1;
+		if (ft_is_prime(i) == 1)
+			j[k++] = i;
 	}
-	n = nb;
-	while (n >= 1)
-	{
-		n = n / 10;
-		count++;
-	}
-	while (--count > 0)
-		ft_putchar((nb / puis(10, (count - 1))) % 10 + '0');
+	j[k] = '\0';
+	ft_afficheprime(j);
+	ft_putnbr(k);
 	ft_putchar('\n');
+	return (j);
 }

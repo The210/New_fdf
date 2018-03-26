@@ -3,77 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 10:17:44 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/05 15:13:15 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/11/10 13:58:34 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/12/05 18:20:48 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	numlen(int n, int sign)
+static void	itoa_isnegative(int *n, int *negative)
 {
-	int	count;
-
-	count = 0;
-	while (n)
+	if (*n < 0)
 	{
-		n /= 10;
-		count++;
-	}
-	if (sign == -1)
-		return (count + 2);
-	else
-		return (count + 1);
-}
-
-static void	fill_string(char *s, int n, int sign)
-{
-	long	a;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	a = n;
-	if (sign == -1)
-	{
-		s[i++] = '-';
-		a *= -1;
-		j = 1;
-	}
-	while (a)
-	{
-		s[i++] = a % 10 + '0';
-		a /= 10;
-	}
-	s[i--] = '\0';
-	while (j < i)
-	{
-		a = s[i];
-		s[i--] = s[j];
-		s[j++] = a;
+		*n *= -1;
+		*negative = 1;
 	}
 }
 
 char		*ft_itoa(int n)
 {
-	char	*s;
-	int		sign;
+	int		tmp;
+	int		len;
+	int		negative;
+	char	*str;
 
-	if (n == 0)
-	{
-		s = (char *)malloc(sizeof(char) * 2);
-		s[0] = '0';
-		s[1] = '\0';
-		return (s);
-	}
-	sign = 1;
-	if (n < 0)
-		sign = -1;
-	if (!(s = (char *)malloc(sizeof(char) * numlen(n, sign))))
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	tmp = n;
+	len = 2;
+	negative = 0;
+	itoa_isnegative(&n, &negative);
+	while (tmp /= 10)
+		len++;
+	len += negative;
+	if ((str = (char*)malloc(sizeof(char) * len)) == NULL)
 		return (NULL);
-	fill_string(s, n, sign);
-	return (s);
+	str[--len] = '\0';
+	while (len--)
+	{
+		str[len] = n % 10 + '0';
+		n = n / 10;
+	}
+	if (negative)
+		str[0] = '-';
+	return (str);
 }

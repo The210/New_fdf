@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 18:38:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/11/12 14:39:30 by dhorvill         ###   ########.fr       */
+/*   Created: 2018/03/13 22:31:35 by dhorvill          #+#    #+#             */
+/*   Updated: 2018/03/13 22:31:45 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+char	*ft_strjoin2(char const *s1, char const *s2)
 {
-	int i;
+	char	*ss;
 
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar(s[i]);
-		i++;
-	}
+	if (!s1 || !s2)
+		return (NULL);
+	if ((ss = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1)) == NULL)
+		return (NULL);
+	ft_strcpy(ss, (char*)s1);
+	ft_strcat(ss, s2);
+	ss[ft_strlen(s1) + ft_strlen(s2)] = ' ';
+	ss[ft_strlen(s1) + ft_strlen(s2) + 1] = '\0';
+	return (ss);
 }

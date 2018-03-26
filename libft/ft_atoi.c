@@ -3,36 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 10:09:03 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/05 10:11:00 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/11/07 15:49:00 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/09 17:00:32 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_atoi(const char *s)
+int	ft_atoi(const char *str)
 {
-	int	p;
-	int	sign;
+	int i;
+	int j;
+	int negative;
 
-	sign = 1;
-	p = 0;
-	while (*s == '\t' || *s == ' ' || *s == '\n' || *s == '\f' || *s == '\r' ||
-	*s == '\v')
-		s++;
-	if (*s == '-')
+	j = 0;
+	negative = 0;
+	i = 0;
+	while (str[i] == '\n' || str[i] == '\t' || str[i] == ' ' ||
+			str[i] == '\r' || str[i] == '\v' || str[i] == '\f')
+		i++;
+	if (str[i] == '-')
+		negative = 1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
-		sign = -1;
-		s++;
+		j = (j * 10) + str[i] - '0';
+		i++;
 	}
-	else if (*s == '+')
-		s++;
-	while (ft_isdigit(*s))
-	{
-		p = p * 10 + *s - '0';
-		s++;
-	}
-	return (p * sign);
+	if (negative == 1)
+		return (-j);
+	else
+		return (j);
 }

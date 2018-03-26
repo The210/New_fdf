@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 10:24:46 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/05 10:31:00 by slynn-ev         ###   ########.fr       */
+/*   Created: 2018/03/13 23:12:37 by dhorvill          #+#    #+#             */
+/*   Updated: 2018/03/13 23:15:02 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstaddend(t_list **alst, t_list *new)
+size_t	ft_tablen(char **s)
 {
-	t_list *tmp;
+	size_t i;
 
-	tmp = *alst;
-	if (tmp == NULL)
-	{
-		*alst = new;
-		new->next = NULL;
-	}
-	else
-	{
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->next = NULL;
-	}
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

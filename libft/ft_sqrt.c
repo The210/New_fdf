@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_intdebug.c                                      :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/06 16:52:43 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/06 16:57:11 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/09/05 15:05:24 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/15 16:48:12 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_intdebug(int a, char *name)
+int	ft_sqrt(int nb)
 {
-	write(1, "\x1b[33m ***DEBUG*** ", 19);
-	write(1, "\x1b[0m", 5);
-	ft_putstr(name);
-	write(1, " == ", 4);
-	ft_putnbr(a);
-	write(1, "\n", 1);
+	int a;
+
+	a = 0;
+	while ((a * a) < nb && a <= 46341)
+		a++;
+	if ((a * a) == nb)
+		return (a);
+	else
+		return (0);
 }

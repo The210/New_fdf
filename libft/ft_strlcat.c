@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 11:22:50 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/05 15:01:34 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/11/09 13:27:09 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/10 18:05:32 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,29 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	unsigned long	i;
-	int				j;
-	int				dsize;
+	size_t	i;
+	size_t	s1_end;
+	int		j;
 
-	dsize = (ft_strlen((char *)src) + ft_strlen(dst));
 	i = 0;
 	j = 0;
-	if ((unsigned long)ft_strlen(dst) > size)
-		return ((int)size + ft_strlen((char *)src));
-	while (dst[i])
+	if (size == 0)
+	{
+		size++;
+		j++;
+	}
+	while (dst[i] && i < size)
 		i++;
-	while (src[j] && i < size - 1)
-		dst[i++] = src[j++];
-	dst[i] = '\0';
-	return (dsize);
+	s1_end = i;
+	while (src[i - s1_end] && i < size - 1)
+	{
+		dst[i] = src[i - s1_end];
+		i++;
+	}
+	if (s1_end < size)
+		dst[i] = '\0';
+	if (j == 1)
+		return (s1_end + ft_strlen((char *)src) - 1);
+	else
+		return (s1_end + ft_strlen((char *)src));
 }

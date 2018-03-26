@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_list.c                                    :+:      :+:    :+:   */
+/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/06 16:33:56 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/06 17:03:45 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/09/04 18:24:38 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/12 15:30:36 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_print_list(t_list *list)
+int	ft_iterative_factorial(int nb)
 {
-	while (list != NULL)
+	int counter;
+
+	counter = nb;
+	if (counter > 12 || counter < 0)
+		return (0);
+	else if (counter == 0)
+		return (1);
+	else
 	{
-		write(1, list->content, ft_strlen(list->content));
-		list = list->next;
+		while (nb > 1)
+		{
+			counter = counter * (nb - 1);
+			nb--;
+		}
+		return (counter);
 	}
 }

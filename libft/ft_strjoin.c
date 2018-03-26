@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 11:21:15 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/05 15:19:16 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/11/09 21:58:01 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/14 14:09:42 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int			len;
-	char		*dst;
-	int			i;
-	char		*s;
+	char	*str;
+	int		i;
+	int		j;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	i = 0;
-	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-	if ((dst = (char *)malloc(sizeof(char) * (len + 1))))
+	str = "";
+	i = -1;
+	j = 0;
+	if (s1 != NULL && s2 != NULL)
 	{
-		s = (char *)s1;
-		while (*s)
-			dst[i++] = *s++;
-		s = (char *)s2;
-		while (*s)
-			dst[i++] = *s++;
-		dst[i] = '\0';
-		return ((char *)dst);
+		str = ft_strnew(ft_strlen((char *)s1) + ft_strlen((char *)s2));
+		if (str == NULL)
+			return (NULL);
+		while (s1[++i])
+			str[i] = s1[i];
+		while (s2[j])
+		{
+			str[i] = s2[j];
+			j++;
+			i++;
+		}
+		str[i] = '\0';
 	}
-	return (NULL);
+	return (str);
 }

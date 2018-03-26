@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 22:12:54 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/14 16:13:07 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/26 22:33:05 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 91) // 8 rotate x
 	{
 		*matrix = init_temps(*matrix);
-		//	matrix->thetax += 3.14/360 * matrix->v;
 		matrix->TMatx1 = 1;
 		matrix->TMatx2 = 0;
 		matrix->TMatx3 = 0;
@@ -73,7 +72,6 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 84) // 2 rotate x
 	{
 		*matrix = init_temps(*matrix);
-		//	matrix->thetax -= 3.14/360 * matrix->v;
 		matrix->TMatx1 = 1;
 		matrix->TMatx2 = 0;
 		matrix->TMatx3 = 0;
@@ -100,7 +98,6 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 88) //6
 	{
 		*matrix = init_temps(*matrix);
-		//	matrix->thetay += 3.14/360 * matrix->v;
 		matrix->TMaty2 = 1;
 		matrix->TMaty1 = 0;
 		matrix->TMaty3 = 0;
@@ -127,7 +124,6 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 86) //4
 	{
 		*matrix = init_temps(*matrix);
-		//matrix->thetay -= 3.14/360 * matrix->v;
 		matrix->TMaty2 = 1;
 		matrix->TMaty1 = 0;
 		matrix->TMaty3 = 0;
@@ -154,7 +150,6 @@ int	interactive(int	keycode, t_matrix *matrix)
 	if (keycode == 92) //9
 	{
 		*matrix = init_temps(*matrix);
-		//	matrix->thetaz += 3.14/360 * matrix->v;
 		matrix->TMatz3 = 1;
 		matrix->TMatz2 = 0;
 		matrix->TMatz1 = 0;
@@ -266,7 +261,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	}
 	if (keycode == 15)//r
 	{
-		matrix->c += 0.20 * matrix->v;
+		matrix->c += 2 * matrix->v;
 		matrix->img = mk_image(*matrix);
 		close(matrix->fd);
 		matrix->fd = open(matrix->av, O_RDONLY);
@@ -274,7 +269,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	}
 	if (keycode == 3)//f
 	{
-		matrix->c -= 0.20 * matrix->v;
+		matrix->c -= 2 * matrix->v;
 		matrix->img = mk_image(*matrix);
 		close(matrix->fd);
 		matrix->fd = open(matrix->av, O_RDONLY);
@@ -290,7 +285,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	}
 	if (keycode == 69)//+
 	{
-		matrix->alt += 0.1;
+		matrix->alt += 10;
 		matrix->img = mk_image(*matrix);
 		close(matrix->fd);
 		matrix->fd = open(matrix->av, O_RDONLY);
@@ -298,7 +293,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	}
 	if (keycode == 78)//-
 	{
-		matrix->alt -= 0.1;
+		matrix->alt -= 10;
 		matrix->img = mk_image(*matrix);
 		close(matrix->fd);
 		matrix->fd = open(matrix->av, O_RDONLY);
@@ -336,6 +331,21 @@ int	interactive(int	keycode, t_matrix *matrix)
 		matrix->fd = open(matrix->av, O_RDONLY);
 		fdf(*matrix);
 	}
-
+	if (keycode == 116)//pgup
+	{
+		matrix->distance += 150;
+		matrix->img = mk_image(*matrix);
+		close(matrix->fd);
+		matrix->fd = open(matrix->av, O_RDONLY);
+		fdf(*matrix);
+	}
+	if (keycode == 121)//pgdown
+	{
+		matrix->distance -= 150;
+		matrix->img = mk_image(*matrix);
+		close(matrix->fd);
+		matrix->fd = open(matrix->av, O_RDONLY);
+		fdf(*matrix);
+	}
 	return (0);
 }

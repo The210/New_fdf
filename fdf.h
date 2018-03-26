@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:53:12 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/14 00:27:43 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/26 21:23:53 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,15 @@ typedef struct s_matrix
 	int			posy;
 	int			col;
 	char		**map;
+	int			flag;
+	int			distance;
 }				t_matrix;
 
 typedef struct s_mlx
 {
 }				t_mlx;
 
-int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string);
+int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string, int startz, int endz, int maxz);
 int		interactive(int keycode, t_matrix *matrix);
 int		fdf(t_matrix matrix);
 char	**get_map(int fd);

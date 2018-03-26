@@ -3,36 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slynn-ev <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 10:59:26 by slynn-ev          #+#    #+#             */
-/*   Updated: 2017/12/05 12:31:58 by slynn-ev         ###   ########.fr       */
+/*   Created: 2017/11/08 13:51:57 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/11 12:36:46 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_rc_putnbr_fd(long num, int fd)
+static int		puis(int no, int i)
 {
-	if (num)
+	int x;
+	int y;
+
+	x = 1;
+	y = 1;
+	while (y <= i)
 	{
-		ft_rc_putnbr_fd(num / 10, fd);
-		ft_putchar_fd(num % 10 + '0', fd);
+		x *= no;
+		y++;
 	}
+	return (x);
 }
 
-void		ft_putnbr_fd(int n, int fd)
+void			ft_putnbr_fd(int nb, int fd)
 {
-	long	a;
+	int	count;
+	int n;
 
-	a = (long)n;
-	if (a < 0)
-	{
-		a *= -1;
-		ft_putchar_fd('-', fd);
-	}
-	if (a == 0)
+	count = 1;
+	if (nb == 0)
 		ft_putchar_fd('0', fd);
-	else
-		ft_rc_putnbr_fd(a, fd);
+	if (nb == -2147483648)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		nb = (nb * -1) - 2000000000;
+	}
+	if (nb < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nb *= -1;
+	}
+	n = nb;
+	while (n >= 1)
+	{
+		n = n / 10;
+		count++;
+	}
+	while (--count > 0)
+		ft_putchar_fd((nb / puis(10, (count - 1))) % 10 + '0', fd);
 }

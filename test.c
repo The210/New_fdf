@@ -6,13 +6,13 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:53:22 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/13 21:53:23 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/26 20:57:34 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"fdf.h"
 
-int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string)
+int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string, int startz, int endz, int maxz)
 {
 	float dx;
 	int sx;
@@ -22,7 +22,11 @@ int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string)
 	float b;
 	int intm;
 	int intb;
+	int startz_colo;
+	int endz_colo;
 
+	//endz_colo = round(endz / maxz) * 255;
+//	startz_colo = 0xFFFFFF;
 	if (x0 == x1 && y0 == y1)
 	{
 		if (x0 < 2000 && y0 < 1399 && x0 >= 0 && y0 >= 0) 
@@ -40,8 +44,9 @@ int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string)
 		b = y0 - m * x0;
 		while (x0 != x1)
 		{
+			startz_colo++;
 			intm = round(m * x0 + b);
-			if (x0 < 2000 && y0 < 1399 && x0 >= 0 && y0 >= 0) 
+			if (x0 < 2000 && intm < 1399 && x0 >= 0 && intm >= 0) 
 				img_string[intm * 2000 + x0] = 0xFFFFFF;
 			x0 += sx;
 		}
@@ -53,12 +58,13 @@ int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string)
 		while (y0 != y1)
 		{
 			intb = round(m * y0 + b);
-			if (x0 < 2000 && y0 < 1399 && x0 >= 0 && y0 >= 0) 
+			startz_colo++;
+			if (intb < 2000 && y0 < 1399 && intb >= 0 && y0 >= 0) 
 				img_string[y0 * 2000 + intb] = 0xFFFFFF;
 			y0 += sy;
 		}
 	}
-	if (x0 < 2000 && y0 < 1399 && x0 >= 0 && y0 >= 0) 
+	if (x1 < 2000 && y1 < 1399 && x1 >= 0 && y1 >= 0) 
 		img_string[y1 * 2000 + x1] = 0xFFFFFF;
 	return (0);
 }

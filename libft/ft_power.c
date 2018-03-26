@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 18:38:53 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/11/12 14:39:30 by dhorvill         ###   ########.fr       */
+/*   Created: 2017/11/12 15:13:33 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/12 15:14:07 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char const *s)
+float	ft_power(float a, int n)
 {
-	int i;
+	int		i;
+	float	b;
+	int		j;
 
-	i = 0;
-	while (s[i])
+	i = 1;
+	b = a;
+	if (n < 0)
+		j = -n;
+	else
+		j = n;
+	if (n == 0)
+		return (1);
+	while (i < j)
 	{
-		ft_putchar(s[i]);
+		a = a * b;
 		i++;
 	}
+	if (n < 0)
+		return (1 / a);
+	else
+		return (a);
 }

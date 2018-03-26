@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:36:18 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/26 21:24:23 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/15 00:47:08 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ t_matrix	get_lines(int fd, char *argv, t_matrix matrix)
 		curr_length = num_len(map, ' ');
 		if (prev_length != curr_length && i != 0)
 		{
-		//	matrix.flag = 1;
-	//		return (matrix);
+			matrix.flag = 1;
+			return (matrix);
 		}
 		prev_length = curr_length;
 		ft_strdel(&map);
@@ -79,11 +79,12 @@ float				get_nbr(char *map)
 		j = j * 10 + map[i] - '0';
 		i++;
 	}
-	return (j);
+	return (-j);
 }
 
 t_coord		map_2d(float x, float y, float z, t_coord point, t_matrix matrix)
 {
+	int sz;
 	int f;
 	float tempx;
 	float tempy;
@@ -91,14 +92,14 @@ t_coord		map_2d(float x, float y, float z, t_coord point, t_matrix matrix)
 	tempy = y;
 	tempx = x;
 	f = 0;
-
+	x = (matrix.Matx1 * tempx + matrix.Matx2 * tempy + matrix.Matx3 * z) * 500;
+	y = (matrix.Maty1 * tempx+ matrix.Maty2 * tempy + matrix.Maty3 * z) * 500;
+	z = (matrix.Matz1 * tempx + matrix.Matz2 * tempy + matrix.Matz3 * z); 
+	sz = 1;
 	if (z == 0)
 		z += 1;
-	//tempy = (y + 1) / z;
-	//tempx =  (x + 1) / z;
-	point.x = (matrix.Matx1 * tempx + matrix.Matx2 * tempy + matrix.Matx3 * z) * (matrix.distance / (matrix.col + matrix.lines));
-	point.y = (matrix.Maty1 * tempx+ matrix.Maty2 * tempy + matrix.Maty3 * z) * (matrix.distance / (matrix.col + matrix.lines));
-//	point.z = (matrix.Matz1 * tempx + matrix.Matz2 * tempy + matrix.Matz3 * z); 
+	point.y = 700 + (y + 1) / (z * 10);
+	point.x = 1000 +( x + 1) / (z * 10);
 	return (point);
 }
 
@@ -111,23 +112,24 @@ void	draw_across(t_matrix matrix, t_coord point, t_coord next_point)
 	y = 0;
 	while (matrix.map[x])
 	{
-	//	ft_putstr("beginning x: ");
-	//	ft_putnbrl(x);
+		sleep(1);
+		ft_putstr("beginning x: ");
+		ft_putnbrl(x);
 		while(matrix.lines * matrix.col >= x && (x % matrix.col != 0 || x == 0))
 		{
-	//		ft_putendl("STARTS");
-			point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
+			ft_putendl("STARTS");
+			point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 10 * matrix.alt + 2+ matrix.c, point, matrix);
 			x++;
-		//	ft_putnbrl(x);
-			next_point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt +2 +matrix.c, point, matrix);
-			//ft_putendl("Assigns points");
-			//ft_putstr("point.x: " );
-			//ft_putnbrl(point.x);
-			ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2 + matrix.c * -1, (get_nbr(matrix.map[x - 2])) / 50 * matrix.alt * -1, 1 * matrix.alt + 2 + matrix.c);
-		//	ft_putendl("ENDS");
+			ft_putnbrl(x);
+			next_point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 10 * matrix.alt +2 +matrix.c, point, matrix);
+			ft_putendl("Assigns points");
+			ft_putstr("point.x: " );
+			ft_putnbrl(point.y);
+			ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string);
+			ft_putendl("ENDS");
 		}
 		y++;
-	//	if (x <= matrix.col * matrix.lines)
+		if (x < matrix.col * matrix.lines)
 			x++;
 	}
 }
@@ -145,9 +147,9 @@ void	draw_columns(t_matrix matrix, t_coord point, t_coord next_point)
 		y = 0;
 		while (y < matrix.lines - 1)
 		{
-			point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c, point, matrix);
-			next_point = map_2d(x + matrix.a, y + 1 + matrix.b, (get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2, point, matrix);
-			ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c * -1,(get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2 * -1, 1 * matrix.alt + matrix.c + 2);
+			point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[indey])) * matrix.alt/ 10 + 2 + matrix.c, point, matrix);
+			next_point = map_2d(x + matrix.a, y + 1 + matrix.b, (get_nbr(matrix.map[indey + matrix.col]))/ 10 *matrix.alt + matrix.c+ 2, point, matrix);
+			ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string);
 			indey += matrix.col;
 			y++;
 		}
@@ -174,16 +176,16 @@ int		fdf(t_matrix matrix)
 
 t_matrix	init_matrix(t_matrix matrix)
 {
-	matrix.posx = 600;
-	matrix.posy = 500;
+	matrix.posx = -0;
+	matrix.posy = -0;
 	matrix.a = 0;
 	matrix.b = 0;
 	matrix.c = 0;
 	matrix.v = 1;
-	matrix.alt = 50;
-	matrix.thetax = 0.11;
-	matrix.thetay = 0.11;
-	matrix.thetaz = 0.11;
+	matrix.alt = 0.5;
+	matrix.thetax = 0.01;
+	matrix.thetay = 0.01;
+	matrix.thetaz = 0.01;
 	matrix.Matx1 = cos(matrix.thetaz);
 	matrix.Matx2 = -sin(matrix.thetaz);
 	matrix.Matx3 = 0;
@@ -210,7 +212,6 @@ int		main(int ac, char **av)
 	matrix.TMaty3 = 0;
 	matrix.TMatz1 = 0;
 	matrix.TMatz2 = 0;
-	matrix.distance = 1000;
 	matrix.TMatz3 = 0;
 	matrix.av = av[1];
 	matrix.fd = open(av[1], O_RDONLY);
