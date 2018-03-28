@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:36:18 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/26 23:23:10 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/28 14:20:13 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,43 +40,45 @@ int num_len(char *map, char c)
 }
 
 /*t_matrix	get_lines(char *argv, t_matrix matrix)
-{
-	int i;
-	int curr_length;
-	int prev_length;
-	char *map;
+  {
+  int i;
+  int curr_length;
+  int prev_length;
+  char *map;
 
-	i = 0;
-	prev_length = 0;
-	while (get_next_line(matrix.fd, &map) > 0)
-	{
-		curr_length = num_len(map, ' ');
-		//matrix.col_line[i] = curr_length;
-		if (prev_length != curr_length && i != 0)
-		{
-			matrix.flag = 1;
-			ft_putendl("Error: invalid map");
-			return (matrix);
-		}
-		prev_length = curr_length;
-		ft_strdel(&map);
-		i++;
-	}
-	close(matrix.fd);
-	matrix.fd = open(argv, O_RDONLY);
-	matrix.lines = i;
-	matrix.col = curr_length;
-	return (matrix);
+  i = 0;
+  prev_length = 0;
+  while (get_next_line(matrix.fd, &map) > 0)
+  {
+  curr_length = num_len(map, ' ');
+//matrix.col_line[i] = curr_length;
+if (prev_length != curr_length && i != 0)
+{
+matrix.flag = 1;
+ft_putendl("Error: invalid map");
+return (matrix);
+}
+prev_length = curr_length;
+ft_strdel(&map);
+i++;
+}
+close(matrix.fd);
+matrix.fd = open(argv, O_RDONLY);
+matrix.lines = i;
+matrix.col = curr_length;
+return (matrix);
 }*/
 
 t_matrix	get_lines(char *argv, t_matrix matrix)
 {
 	int i;
 	int	length;
+	int	max_length;
 	char	*map;
 
 	i = 0;
 	matrix.num_num = 0;
+	max_length = 0;
 	while (get_next_line(matrix.fd, &map) > 0)
 	{
 		length = num_len(map, ' ');
@@ -96,6 +98,8 @@ t_matrix	get_lines(char *argv, t_matrix matrix)
 	while (get_next_line(matrix.fd, &map) > 0)
 	{
 		length = num_len(map, ' ');
+		if (length > max_length)
+			max_length = length;
 		ft_strdel(&map);
 		matrix.num_col[i] = length;
 		matrix.num_num += length;
@@ -103,7 +107,7 @@ t_matrix	get_lines(char *argv, t_matrix matrix)
 	}
 	close(matrix.fd);
 	matrix.fd = open(argv, O_RDONLY);
-	matrix.col = length;
+	matrix.col = max_length;
 	return (matrix);
 }
 
@@ -135,46 +139,95 @@ t_coord		map_2d(float x, float y, float z, t_coord point, t_matrix matrix)
 }
 
 /*void	draw_across(t_matrix matrix, t_coord point, t_coord next_point)
+  {
+  int x;
+  int y;
+
+  x = 1;
+  y = 0;
+  while (matrix.map[x])
+  {
+  while(matrix.lines * matrix.col >= x && (x % matrix.col != 0 || x == 0))
+  {
+  point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
+  x++;
+  next_point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt +2 +matrix.c, point, matrix);
+  ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2 + matrix.c * -1, (get_nbr(matrix.map[x - 2])) / 50 * matrix.alt * -1, 1 * matrix.alt + 2 + matrix.c);
+  }
+  y++;
+  x++;
+  }
+  }*/
+
+void	draw_across(t_matrix matrix, t_coord point, t_coord next_point)
 {
 	int x;
-	int y;
+	int	y;
 
-	x = 1;
 	y = 0;
-	while (matrix.map[x])
+	matrix.counted = 0;
+	while (y < matrix.lines)
 	{
-		while(matrix.lines * matrix.col >= x && (x % matrix.col != 0 || x == 0))
+		x = 0;
+		while (x < matrix.num_col[y] - 1)
 		{
-			point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
+			point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[x + matrix.counted])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
 			x++;
-			next_point = map_2d((x - 1 - (y * matrix.col)) + matrix.a, y + matrix.b, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt +2 +matrix.c, point, matrix);
-			ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[x - 1])) / 50 * matrix.alt + 2 + matrix.c * -1, (get_nbr(matrix.map[x - 2])) / 50 * matrix.alt * -1, 1 * matrix.alt + 2 + matrix.c);
+			next_point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[x + matrix.counted])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
+			if (matrix.num_col[y + 1] > x || (matrix.num_col[y - 1] && matrix.num_col[y - 1] > x))
+			{
+				ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[x + matrix.counted])) / 50 * matrix.alt + 2 + matrix.c * -1, (get_nbr(matrix.map[x +matrix.counted - 1])) / 50 * matrix.alt * -1, 1 * matrix.alt + 2 + matrix.c);
+			}
 		}
+		matrix.counted += x + 1;
 		y++;
-			x++;
 	}
-}*/
+}
 
-void	draw_across(t_matrixmatrix, t_coord point, t_coord next_point);
+/*void	draw_columns(t_matrix matrix, t_coord point, t_coord next_point)
+  {
+  int	x;
+  int	y;
+  int indey;
+
+  x = 0;
+  while(x < matrix.col)
+  {
+  indey = x;
+  y = 0;
+  while (y < matrix.lines - 1)
+  {
+  point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c, point, matrix);
+  next_point = map_2d(x + matrix.a, y + 1 + matrix.b, (get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2, point, matrix);
+  ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c * -1,(get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2 * -1, 1 * matrix.alt + matrix.c + 2);
+  indey += matrix.col;
+  y++;
+  }
+  x++;
+  }
+  }*/
 
 void	draw_columns(t_matrix matrix, t_coord point, t_coord next_point)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 	int indey;
 
 	x = 0;
-	while(x < matrix.col)
+	while (x < matrix.col)
 	{
 		indey = x;
 		y = 0;
 		while (y < matrix.lines - 1)
 		{
-			point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c, point, matrix);
-			next_point = map_2d(x + matrix.a, y + 1 + matrix.b, (get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2, point, matrix);
-			ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c * -1,(get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2 * -1, 1 * matrix.alt + matrix.c + 2);
-			indey += matrix.col;
-			y++;
+			if (matrix.num_col[y] > x && matrix.num_col[y + 1] > x)
+			{
+				point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[indey])) * matrix.alt / 50 + 2 + matrix.c, point, matrix);
+				next_point = map_2d(x + matrix.a, y + 1 + matrix.b, (get_nbr(matrix.map[indey + matrix.num_col[y]])) / 50 * matrix.alt + matrix.c + 2, point, matrix);
+				ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c * -1,(get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2 * -1, 1 * matrix.alt + matrix.c + 2);
+			}
+			indey += matrix.num_col[y];
+			y ++;
 		}
 		x++;
 	}
@@ -256,7 +309,7 @@ int		main(int ac, char **av)
 	ft_putnbrl(matrix.col);
 	ft_putnbrl(matrix.lines);
 	ft_putnbrl(matrix.col * matrix.lines);
-//	matrix.col = (ft_tablen(matrix.map) / matrix.lines);
+	//	matrix.col = (ft_tablen(matrix.map) / matrix.lines);
 	fdf(matrix);
 	mlx_key_hook(matrix.win, interactive, (void *)&matrix);
 	mlx_loop(matrix.mlx);

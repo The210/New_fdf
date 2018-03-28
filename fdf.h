@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:53:12 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/26 23:20:14 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/26 23:29:51 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_matrix
 	int			flag;
 	int			distance;
 	int			num_num;
+	int			counted;
 	int			*num_col;
 }				t_matrix;
 
