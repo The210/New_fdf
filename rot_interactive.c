@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 22:12:54 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/26 22:33:05 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/29 16:29:38 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	}
 	if (keycode == 69)//+
 	{
-		matrix->alt += 10;
+		matrix->alt += 0.05;
 		matrix->img = mk_image(*matrix);
 		close(matrix->fd);
 		matrix->fd = open(matrix->av, O_RDONLY);
@@ -293,7 +293,7 @@ int	interactive(int	keycode, t_matrix *matrix)
 	}
 	if (keycode == 78)//-
 	{
-		matrix->alt -= 10;
+		matrix->alt -= 0.05;
 		matrix->img = mk_image(*matrix);
 		close(matrix->fd);
 		matrix->fd = open(matrix->av, O_RDONLY);
@@ -341,11 +341,14 @@ int	interactive(int	keycode, t_matrix *matrix)
 	}
 	if (keycode == 121)//pgdown
 	{
-		matrix->distance -= 150;
-		matrix->img = mk_image(*matrix);
-		close(matrix->fd);
-		matrix->fd = open(matrix->av, O_RDONLY);
-		fdf(*matrix);
+		if (matrix->distance >= 151)
+		{
+			matrix->distance -= 150;
+			matrix->img = mk_image(*matrix);
+			close(matrix->fd);
+			matrix->fd = open(matrix->av, O_RDONLY);
+			fdf(*matrix);
+		}
 	}
 	return (0);
 }

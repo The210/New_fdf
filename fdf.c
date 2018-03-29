@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:36:18 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/28 14:20:13 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/29 16:36:43 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,22 @@ float				get_nbr(char *map)
 {
 	float j;
 	int i;
+	int f;
 
 	j = 0;
 	i = 0;
+	f = 1;
+	if (map[i] == '-')
+	{
+		f = -1;
+		i = 1;
+	}
 	while (map[i])
 	{
 		j = j * 10 + map[i] - '0';
 		i++;
 	}
-	return (j);
+	return (j * f);
 }
 
 t_coord		map_2d(float x, float y, float z, t_coord point, t_matrix matrix)
@@ -171,9 +178,9 @@ void	draw_across(t_matrix matrix, t_coord point, t_coord next_point)
 		x = 0;
 		while (x < matrix.num_col[y] - 1)
 		{
-			point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[x + matrix.counted])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
+			point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[x + matrix.counted])) * matrix.alt + matrix.c, point, matrix);
 			x++;
-			next_point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[x + matrix.counted])) / 50 * matrix.alt + 2+ matrix.c, point, matrix);
+			next_point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[x + matrix.counted])) * matrix.alt + matrix.c, point, matrix);
 			if (matrix.num_col[y + 1] > x || (matrix.num_col[y - 1] && matrix.num_col[y - 1] > x))
 			{
 				ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[x + matrix.counted])) / 50 * matrix.alt + 2 + matrix.c * -1, (get_nbr(matrix.map[x +matrix.counted - 1])) / 50 * matrix.alt * -1, 1 * matrix.alt + 2 + matrix.c);
@@ -222,8 +229,8 @@ void	draw_columns(t_matrix matrix, t_coord point, t_coord next_point)
 		{
 			if (matrix.num_col[y] > x && matrix.num_col[y + 1] > x)
 			{
-				point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[indey])) * matrix.alt / 50 + 2 + matrix.c, point, matrix);
-				next_point = map_2d(x + matrix.a, y + 1 + matrix.b, (get_nbr(matrix.map[indey + matrix.num_col[y]])) / 50 * matrix.alt + matrix.c + 2, point, matrix);
+				point = map_2d(x + matrix.a, y + matrix.b, (get_nbr(matrix.map[indey])) * matrix.alt + matrix.c, point, matrix);
+				next_point = map_2d(x + matrix.a, y + 1 + matrix.b, (get_nbr(matrix.map[indey + matrix.num_col[y]])) * matrix.alt + matrix.c, point, matrix);
 				ft_draw_line2(point.x + matrix.posx, point.y + matrix.posy, next_point.x + matrix.posx, next_point.y + matrix.posy, matrix.img_string, (get_nbr(matrix.map[indey])) * matrix.alt/ 50 + 2 + matrix.c * -1,(get_nbr(matrix.map[indey + matrix.col]))/ 50 *matrix.alt + matrix.c+ 2 * -1, 1 * matrix.alt + matrix.c + 2);
 			}
 			indey += matrix.num_col[y];
@@ -258,7 +265,7 @@ t_matrix	init_matrix(t_matrix matrix)
 	matrix.b = 0;
 	matrix.c = 0;
 	matrix.v = 1;
-	matrix.alt = 50;
+	matrix.alt = 0.1;
 	matrix.thetax = 0.11;
 	matrix.thetay = 0.11;
 	matrix.thetaz = 0.11;
