@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:36:18 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/29 16:36:43 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/29 17:28:51 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int num_len(char *map, char c)
 	i = 0;
 	sym = 0;
 	count = 0;
+	map = ft_strtrimc(map, ' ');
 	while(map[i])
 	{
 		while (map[i] && map[i] != c)
@@ -138,8 +139,8 @@ t_coord		map_2d(float x, float y, float z, t_coord point, t_matrix matrix)
 	float tempx;
 	float tempy;
 
-	tempy = y;
-	tempx = x;
+	tempy = y + round(matrix.lines / 2);
+	tempx = x + round(matrix.col / 2);
 	point.x = (matrix.Matx1 * tempx + matrix.Matx2 * tempy + matrix.Matx3 * z) * (matrix.distance / (matrix.num_num / matrix.lines));
 	point.y = (matrix.Maty1 * tempx+ matrix.Maty2 * tempy + matrix.Maty3 * z) * (matrix.distance / (matrix.num_num / matrix.lines));
 	return (point);
@@ -259,7 +260,7 @@ int		fdf(t_matrix matrix)
 
 t_matrix	init_matrix(t_matrix matrix)
 {
-	matrix.posx = 600;
+	matrix.posx = 500;
 	matrix.posy = 500;
 	matrix.a = 0;
 	matrix.b = 0;
