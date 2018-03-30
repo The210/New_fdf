@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 17:15:17 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 17:15:18 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/30 17:32:46 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ void		interaction(int keycode, t_matrix *matrix)
 		matrix->alt -= 0.05;
 	if (keycode == 116)
 		matrix->distance += 150;
-	if (keycode == 121)
-	{
-		if (matrix->distance >= 151)
-			matrix->distance -= 150;
-	}
+	if (keycode == 121 && matrix->distance >= 151)
+		matrix->distance -= 150;
 }
 
 void		colors(int keycode, t_matrix *matrix)

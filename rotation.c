@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 16:38:05 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 17:04:33 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/30 18:11:38 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 t_matrix	matrix_math(t_matrix matrix)
 {
-	matrix.Matx1 = (matrix.PMatx1 * matrix.TMatx1) +
-		(matrix.PMatx2 * matrix.TMaty1) + (matrix.PMatx3 * matrix.TMatz1);
-	matrix.Maty1 = (matrix.PMaty1 * matrix.TMatx1) +
-		(matrix.PMaty2 * matrix.TMaty1) + (matrix.PMaty3 * matrix.TMatz1);
-	matrix.Matx2 = (matrix.PMatx1 * matrix.TMatx2) +
-		(matrix.PMatx2 * matrix.TMaty2) + (matrix.PMatx3 * matrix.TMatz2);
-	matrix.Maty2 = (matrix.PMaty1 * matrix.TMatx2) +
-		(matrix.PMaty2 * matrix.TMaty2) + (matrix.PMaty3 * matrix.TMatz2);
-	matrix.Matx3 = (matrix.PMatx1 * matrix.TMatx3) +
-		(matrix.PMatx2 * matrix.TMaty3) + (matrix.PMatx3 * matrix.TMatz3);
-	matrix.Maty3 = (matrix.PMaty1 * matrix.TMatx3) +
-		(matrix.PMaty2 * matrix.TMaty3) + (matrix.PMaty3 * matrix.TMatz3);
+	matrix.matx1 = (matrix.pmatx1 * matrix.tmatx1) +
+		(matrix.pmatx2 * matrix.tmaty1) + (matrix.pmatx3 * matrix.tmatz1);
+	matrix.maty1 = (matrix.pmaty1 * matrix.tmatx1) +
+		(matrix.pmaty2 * matrix.tmaty1) + (matrix.pmaty3 * matrix.tmatz1);
+	matrix.matx2 = (matrix.pmatx1 * matrix.tmatx2) +
+		(matrix.pmatx2 * matrix.tmaty2) + (matrix.pmatx3 * matrix.tmatz2);
+	matrix.maty2 = (matrix.pmaty1 * matrix.tmatx2) +
+		(matrix.pmaty2 * matrix.tmaty2) + (matrix.pmaty3 * matrix.tmatz2);
+	matrix.matx3 = (matrix.pmatx1 * matrix.tmatx3) +
+		(matrix.pmatx2 * matrix.tmaty3) + (matrix.pmatx3 * matrix.tmatz3);
+	matrix.maty3 = (matrix.pmaty1 * matrix.tmatx3) +
+		(matrix.pmaty2 * matrix.tmaty3) + (matrix.pmaty3 * matrix.tmatz3);
 	return (matrix);
 }
 
@@ -33,27 +33,27 @@ void		rotatex(int keycode, t_matrix *matrix)
 {
 	if (keycode == 91)
 	{
-		matrix->TMatx1 = 1;
-		matrix->TMatx2 = 0;
-		matrix->TMatx3 = 0;
-		matrix->TMaty1 = 0;
-		matrix->TMatz1 = 0;
-		matrix->TMaty2 = cos(matrix->thetax);
-		matrix->TMaty3 = -sin(matrix->thetax);
-		matrix->TMatz2 = sin(matrix->thetax);
-		matrix->TMatz3 = cos(matrix->thetax);
+		matrix->tmatx1 = 1;
+		matrix->tmatx2 = 0;
+		matrix->tmatx3 = 0;
+		matrix->tmaty1 = 0;
+		matrix->tmatz1 = 0;
+		matrix->tmaty2 = cos(matrix->thetax);
+		matrix->tmaty3 = -sin(matrix->thetax);
+		matrix->tmatz2 = sin(matrix->thetax);
+		matrix->tmatz3 = cos(matrix->thetax);
 	}
 	if (keycode == 84)
 	{
-		matrix->TMatx1 = 1;
-		matrix->TMatx2 = 0;
-		matrix->TMatx3 = 0;
-		matrix->TMaty1 = 0;
-		matrix->TMatz1 = 0;
-		matrix->TMaty2 = cos(matrix->thetax);
-		matrix->TMaty3 = sin(matrix->thetax);
-		matrix->TMatz2 = -sin(matrix->thetax);
-		matrix->TMatz3 = cos(matrix->thetax);
+		matrix->tmatx1 = 1;
+		matrix->tmatx2 = 0;
+		matrix->tmatx3 = 0;
+		matrix->tmaty1 = 0;
+		matrix->tmatz1 = 0;
+		matrix->tmaty2 = cos(matrix->thetax);
+		matrix->tmaty3 = sin(matrix->thetax);
+		matrix->tmatz2 = -sin(matrix->thetax);
+		matrix->tmatz3 = cos(matrix->thetax);
 	}
 }
 
@@ -61,27 +61,27 @@ void		rotatey(int keycode, t_matrix *matrix)
 {
 	if (keycode == 88)
 	{
-		matrix->TMaty2 = 1;
-		matrix->TMaty1 = 0;
-		matrix->TMaty3 = 0;
-		matrix->TMatx2 = 0;
-		matrix->TMatz2 = 0;
-		matrix->TMatx1 = cos(matrix->thetay);
-		matrix->TMatx3 = sin(matrix->thetay);
-		matrix->TMatz1 = -sin(matrix->thetay);
-		matrix->TMatz3 = cos(matrix->thetay);
+		matrix->tmaty2 = 1;
+		matrix->tmaty1 = 0;
+		matrix->tmaty3 = 0;
+		matrix->tmatx2 = 0;
+		matrix->tmatz2 = 0;
+		matrix->tmatx1 = cos(matrix->thetay);
+		matrix->tmatx3 = sin(matrix->thetay);
+		matrix->tmatz1 = -sin(matrix->thetay);
+		matrix->tmatz3 = cos(matrix->thetay);
 	}
 	if (keycode == 86)
 	{
-		matrix->TMaty2 = 1;
-		matrix->TMaty1 = 0;
-		matrix->TMaty3 = 0;
-		matrix->TMatx2 = 0;
-		matrix->TMatz2 = 0;
-		matrix->TMatx1 = cos(matrix->thetay);
-		matrix->TMatx3 = -sin(matrix->thetay);
-		matrix->TMatz1 = sin(matrix->thetay);
-		matrix->TMatz3 = cos(matrix->thetay);
+		matrix->tmaty2 = 1;
+		matrix->tmaty1 = 0;
+		matrix->tmaty3 = 0;
+		matrix->tmatx2 = 0;
+		matrix->tmatz2 = 0;
+		matrix->tmatx1 = cos(matrix->thetay);
+		matrix->tmatx3 = -sin(matrix->thetay);
+		matrix->tmatz1 = sin(matrix->thetay);
+		matrix->tmatz3 = cos(matrix->thetay);
 	}
 }
 
@@ -89,27 +89,27 @@ void		rotatez(int keycode, t_matrix *matrix)
 {
 	if (keycode == 92)
 	{
-		matrix->TMatz3 = 1;
-		matrix->TMatz2 = 0;
-		matrix->TMatz1 = 0;
-		matrix->TMatx3 = 0;
-		matrix->TMaty3 = 0;
-		matrix->TMatx1 = cos(matrix->thetaz);
-		matrix->TMaty1 = sin(matrix->thetaz);
-		matrix->TMatx2 = -sin(matrix->thetaz);
-		matrix->TMaty2 = cos(matrix->thetaz);
+		matrix->tmatz3 = 1;
+		matrix->tmatz2 = 0;
+		matrix->tmatz1 = 0;
+		matrix->tmatx3 = 0;
+		matrix->tmaty3 = 0;
+		matrix->tmatx1 = cos(matrix->thetaz);
+		matrix->tmaty1 = sin(matrix->thetaz);
+		matrix->tmatx2 = -sin(matrix->thetaz);
+		matrix->tmaty2 = cos(matrix->thetaz);
 	}
 	if (keycode == 89)
 	{
-		matrix->TMatz3 = 1;
-		matrix->TMatz2 = 0;
-		matrix->TMatz1 = 0;
-		matrix->TMatx3 = 0;
-		matrix->TMaty3 = 0;
-		matrix->TMatx1 = cos(matrix->thetaz);
-		matrix->TMaty1 = -sin(matrix->thetaz);
-		matrix->TMatx2 = sin(matrix->thetaz);
-		matrix->TMaty2 = cos(matrix->thetaz);
+		matrix->tmatz3 = 1;
+		matrix->tmatz2 = 0;
+		matrix->tmatz1 = 0;
+		matrix->tmatx3 = 0;
+		matrix->tmaty3 = 0;
+		matrix->tmatx1 = cos(matrix->thetaz);
+		matrix->tmaty1 = -sin(matrix->thetaz);
+		matrix->tmatx2 = sin(matrix->thetaz);
+		matrix->tmaty2 = cos(matrix->thetaz);
 	}
 }
 

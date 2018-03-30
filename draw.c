@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 15:11:15 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 16:04:55 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/30 18:15:20 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_coord		map_2d(float z, t_coord point, t_matrix matrix)
 
 	tempy = matrix.ky - (matrix.lines / 2);
 	tempx = matrix.kx - matrix.col / 2;
-	point.x = (matrix.Matx1 * tempx + matrix.Matx2 * tempy + matrix.Matx3 * z)
+	point.x = (matrix.matx1 * tempx + matrix.matx2 * tempy + matrix.matx3 * z)
 	* (matrix.distance / (matrix.num_num / matrix.lines));
-	point.y = (matrix.Maty1 * tempx + matrix.Maty2 * tempy + matrix.Maty3 * z)
+	point.y = (matrix.maty1 * tempx + matrix.maty2 * tempy + matrix.maty3 * z)
 	* (matrix.distance / (matrix.num_num / matrix.lines));
 	point.x += matrix.posx;
 	point.y += matrix.posy;

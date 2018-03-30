@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:53:12 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 16:49:18 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/30 18:07:28 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include "get_next_line.h"
 # include <math.h>
+
 typedef struct	s_coord
 {
 	int		x;
@@ -25,37 +26,37 @@ typedef struct	s_coord
 	int		z;
 }				t_coord;
 
-typedef struct s_matrix
+typedef struct	s_matrix
 {
 	int			kx;
 	int			ky;
-	float		Matx1;
-	float		Matx2;
-	float		Matx3;
-	float		Maty1;
-	float		Maty2;
-	float		Maty3;
-	float		Matz1;
-	float		Matz2;
-	float		Matz3;
-	float		TMatx1;
-	float		TMatx2;
-	float		TMatx3;
-	float		TMaty1;
-	float		TMaty2;
-	float		TMaty3;
-	float		TMatz1;
-	float		TMatz2;
-	float		TMatz3;
-	float		PMatx1;
-	float		PMatx2;
-	float		PMatx3;
-	float		PMaty1;
-	float		PMaty2;
-	float		PMaty3;
-	float		PMatz1;
-	float		PMatz2;
-	float		PMatz3;
+	float		matx1;
+	float		matx2;
+	float		matx3;
+	float		maty1;
+	float		maty2;
+	float		maty3;
+	float		matz1;
+	float		matz2;
+	float		matz3;
+	float		tmatx1;
+	float		tmatx2;
+	float		tmatx3;
+	float		tmaty1;
+	float		tmaty2;
+	float		tmaty3;
+	float		tmatz1;
+	float		tmatz2;
+	float		tmatz3;
+	float		pmatx1;
+	float		pmatx2;
+	float		pmatx3;
+	float		pmaty1;
+	float		pmaty2;
+	float		pmaty3;
+	float		pmatz1;
+	float		pmatz2;
+	float		pmatz3;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -94,15 +95,17 @@ typedef struct s_matrix
 	int			intb;
 }				t_matrix;
 
-int			ft_draw_line2(t_coord point, t_coord next_point, t_matrix matrix);
-int			interactive(int keycode, t_matrix *matrix);
-int			fdf(t_matrix matrix);
-char		**get_map(int fd);
-void		draw_across(t_matrix matrix, t_coord point, t_coord next_point);
-void		draw_columns(t_matrix matrix, t_coord point, t_coord next_point);
-int			num_len(char *map, char c);
-t_matrix	get_lines(char *argv, t_matrix matrix);
-t_matrix	init_matrix(t_matrix *matrix);
-void		rotation(int keycode, t_matrix *matrix);	
-t_matrix	init_temps(t_matrix matrix);
+int				ft_draw_line2(t_coord point,
+				t_coord next_point, t_matrix matrix);
+int				interactive(int keycode, t_matrix *matrix);
+int				fdf(t_matrix matrix);
+char			**get_map(int fd);
+void			draw_across(t_matrix matrix, t_coord point, t_coord next_point);
+void			draw_columns(t_matrix matrix,
+				t_coord point, t_coord next_point);
+int				num_len(char *map, char c);
+t_matrix		get_lines(char *argv, t_matrix matrix);
+t_matrix		init_matrix(t_matrix *matrix);
+void			rotation(int keycode, t_matrix *matrix);
+t_matrix		init_temps(t_matrix matrix);
 #endif
