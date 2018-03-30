@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 13:51:57 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/11/11 12:36:46 by dhorvill         ###   ########.fr       */
+/*   Created: 2017/11/29 16:59:09 by smerelo           #+#    #+#             */
+/*   Updated: 2017/12/05 20:24:55 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,31 @@ static int		puis(int no, int i)
 	return (x);
 }
 
-void			ft_putnbr_fd(int nb, int fd)
+void			ft_putnbr_fd(int n, int fd)
 {
 	int	count;
-	int n;
+	int nb;
 
 	count = 1;
-	if (nb == 0)
+	if (n == 0)
 		ft_putchar_fd('0', fd);
-	if (nb == -2147483648)
+	if (n == -2147483648)
 	{
 		ft_putchar_fd('-', fd);
 		ft_putchar_fd('2', fd);
-		nb = (nb * -1) - 2000000000;
+		n = (n * -1) - 2000000000;
 	}
-	if (nb < 0)
+	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
-		nb *= -1;
+		n *= -1;
 	}
-	n = nb;
-	while (n >= 1)
+	nb = n;
+	while (nb >= 1)
 	{
-		n = n / 10;
+		nb = nb / 10;
 		count++;
 	}
 	while (--count > 0)
-		ft_putchar_fd((nb / puis(10, (count - 1))) % 10 + '0', fd);
+		ft_putchar_fd((n / puis(10, (count - 1))) % 10 + '0', fd);
 }

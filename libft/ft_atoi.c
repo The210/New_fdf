@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:49:00 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/11/09 17:00:32 by dhorvill         ###   ########.fr       */
+/*   Created: 2017/11/28 02:12:33 by smerelo           #+#    #+#             */
+/*   Updated: 2017/12/05 23:32:10 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
 	int i;
 	int j;

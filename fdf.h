@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 21:53:12 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/26 23:29:51 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/30 16:49:18 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 # include <math.h>
 typedef struct	s_coord
 {
-	float		x;
-	float		y;
-	float		z;
+	int		x;
+	int		y;
+	int		z;
 }				t_coord;
 
 typedef struct s_matrix
 {
+	int			kx;
+	int			ky;
 	float		Matx1;
 	float		Matx2;
 	float		Matx3;
@@ -79,16 +81,28 @@ typedef struct s_matrix
 	int			flag;
 	int			distance;
 	int			num_num;
-	int			counted;
 	int			*num_col;
+	int			counted;
+	int			color;
+	float		dx;
+	int			sx;
+	float		dy;
+	int			sy;
+	float		m;
+	float		pb;
+	int			intm;
+	int			intb;
 }				t_matrix;
 
-typedef struct s_mlx
-{
-}				t_mlx;
-
-int		ft_draw_line2(int x0, int y0, int x1, int y1, int *img_string, int startz, int endz, int maxz);
-int		interactive(int keycode, t_matrix *matrix);
-int		fdf(t_matrix matrix);
-char	**get_map(int fd);
+int			ft_draw_line2(t_coord point, t_coord next_point, t_matrix matrix);
+int			interactive(int keycode, t_matrix *matrix);
+int			fdf(t_matrix matrix);
+char		**get_map(int fd);
+void		draw_across(t_matrix matrix, t_coord point, t_coord next_point);
+void		draw_columns(t_matrix matrix, t_coord point, t_coord next_point);
+int			num_len(char *map, char c);
+t_matrix	get_lines(char *argv, t_matrix matrix);
+t_matrix	init_matrix(t_matrix *matrix);
+void		rotation(int keycode, t_matrix *matrix);	
+t_matrix	init_temps(t_matrix matrix);
 #endif

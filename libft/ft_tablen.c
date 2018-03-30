@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 23:12:37 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/13 23:15:02 by dhorvill         ###   ########.fr       */
+/*   Created: 2018/03/22 06:20:34 by smerelo           #+#    #+#             */
+/*   Updated: 2018/03/26 22:44:32 by smerelo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_tablen(char **s)
+size_t		ft_tablen(char **s)
 {
 	size_t i;
 
