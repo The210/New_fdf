@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strtrimc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 13:16:31 by dhorvill          #+#    #+#             */
-/*   Updated: 2017/11/11 12:50:24 by dhorvill         ###   ########.fr       */
+/*   Created: 2017/11/11 12:03:22 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/14 16:02:39 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strtrimc(char const *s, char c)
 {
 	int		i;
-	char	*dest;
+	int		len;
+	char	*str;
 
-	i = 0;
-	while (s1[i])
-		i++;
-	if ((dest = (char *)malloc((sizeof(*s1)) * (i + 1))) == 0)
+	if (s == NULL)
 		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	len = ft_strlen(s);
+	while (s[len - 1] == c)
+		len--;
+	i = -1;
+	while (s[++i] == c)
+		len--;
+	if (len <= 0)
+		len = 0;
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	s += i;
+	i = -1;
+	while (++i < len)
+		str[i] = *s++;
+	str[i] = '\0';
+	return (str);
 }

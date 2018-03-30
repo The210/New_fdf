@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 16:55:41 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/09 16:59:15 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/11/09 19:04:19 by ybouzgao          #+#    #+#             */
+/*   Updated: 2017/11/09 21:19:48 by ybouzgao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-void	ft_bzero(void *s, size_t n)
+float	ft_power(float a, int n)
 {
-	int i;
+	int		i;
+	float	b;
+	int		j;
 
-	i = 0;
-	while (n > 0)
+	i = 1;
+	b = a;
+	if (n < 0)
+		j = -n;
+	else
+		j = n;
+	if (n == 0)
+		return (1);
+	while (i < j)
 	{
-		((char *)s)[i] = 0;
+		a = a * b;
 		i++;
-		n--;
 	}
+	if (n < 0)
+		return (1 / a);
+	else
+		return (a);
 }

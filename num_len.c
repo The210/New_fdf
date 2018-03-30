@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 15:11:05 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 15:21:34 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/03/30 17:17:49 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			num_len(char *map, char c)
 	i = 0;
 	sym = 0;
 	count = 0;
-	map = ft_strtrim_2(map, ' ');
+	map = ft_strtrimc(map, ' ');
 	while (map[i])
 	{
 		while (map[i] && map[i] != c)

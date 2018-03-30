@@ -3,94 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/02 02:42:27 by smerelo           #+#    #+#             */
-/*   Updated: 2017/12/06 06:21:35 by smerelo          ###   ########.fr       */
+/*   Created: 2017/11/10 13:58:34 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/11 15:56:02 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		p(int a, int b)
+static void	itoa_isnegative(int *n, int *negative)
 {
-	int i;
-	int c;
-
-	c = a;
-	i = 1;
-	if (b == 0)
-		return (1);
-	while (i < b)
+	if (*n < 0)
 	{
-		a = a * c;
-		i++;
+		*n *= -1;
+		*negative = 1;
 	}
-	return (a);
 }
 
-static char		*final(char *s, int long c, int j, int i)
+char		*ft_itoa(int n)
 {
-	if (c == 0)
-	{
-		s[0] = '0';
-		return (s);
-	}
-	while (i >= 1)
-	{
-		s[j] = (((c / p(10, (i - 1))) % 10) + '0');
-		i--;
-		j++;
-	}
-	return (s);
-}
+	int		tmp;
+	int		len;
+	int		negative;
+	char	*str;
 
-static char		*extra(int i, int long c, int j, int k)
-{
-	char	*s;
-
-	k = i;
-	if (c < 0)
-	{
-		k = k + 1;
-		j = j + 1;
-	}
-	if ((s = ft_strnew(k)) == NULL)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	tmp = n;
+	len = 2;
+	negative = 0;
+	itoa_isnegative(&n, &negative);
+	while (tmp /= 10)
+		len++;
+	len += negative;
+	if ((str = (char*)malloc(sizeof(char) * len)) == NULL)
 		return (NULL);
-	if (c < 0)
+	str[--len] = '\0';
+	while (len--)
 	{
-		s[0] = '-';
-		c = c * -1;
+		str[len] = n % 10 + '0';
+		n = n / 10;
 	}
-	s = final(s, c, j, i);
-	return (s);
-}
-
-char			*ft_itoa(int n)
-{
-	int long	c;
-	int	long	i;
-	char		*s;
-	int			j;
-	int	long	k;
-
-	k = 0;
-	c = n;
-	i = 0;
-	j = 0;
-	if (c == 0)
-	{
-		if ((s = ft_strnew(1)) == NULL)
-			return (NULL);
-		s[0] = '0';
-		return (s);
-	}
-	while (c != 0)
-	{
-		c = c / 10;
-		i++;
-	}
-	c = n;
-	s = extra(i, c, j, k);
-	return (s);
+	if (negative)
+		str[0] = '-';
+	return (str);
 }

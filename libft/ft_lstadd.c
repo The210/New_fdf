@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 16:55:41 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/09 16:59:15 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/11/13 14:26:34 by ybouzgao          #+#    #+#             */
+/*   Updated: 2017/11/13 14:38:00 by ybouzgao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	int i;
+	t_list	*chain;
 
-	i = 0;
-	while (n > 0)
-	{
-		((char *)s)[i] = 0;
-		i++;
-		n--;
-	}
+	chain = *alst;
+	*alst = new;
+	(*alst)->next = chain;
 }

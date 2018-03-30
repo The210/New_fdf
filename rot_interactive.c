@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rot_interactive.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/28 19:17:42 by smerelo           #+#    #+#             */
-/*   Updated: 2018/03/30 16:46:15 by dhorvill         ###   ########.fr       */
+/*   Created: 2018/03/30 17:15:17 by dhorvill          #+#    #+#             */
+/*   Updated: 2018/03/30 17:15:18 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int			interactive(int keycode, t_matrix *matrix)
 		matrix->v += 0.5;
 	if (keycode == 257)
 		matrix->v -= 0.5;
-	ft_putnbrl(keycode);
 	rotation(keycode, matrix);
 	movement(keycode, matrix);
 	interaction(keycode, matrix);

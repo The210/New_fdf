@@ -3,82 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smerelo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/03 17:19:45 by smerelo           #+#    #+#             */
-/*   Updated: 2017/12/06 06:24:19 by smerelo          ###   ########.fr       */
+/*   Created: 2017/11/09 22:36:51 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/25 01:25:47 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t		len(char *s, size_t j, char c)
+static int	nbw(char *s, char c)
 {
-	size_t	l;
-	int		k;
-
-	k = j;
-	l = 0;
-	while (s[k] && s[k] != c)
-	{
-		l++;
-		k++;
-	}
-	return (l);
-}
-
-static size_t		wcount(char *s, char c)
-{
-	int		i;
-	size_t	w;
+	int i;
+	int sym;
+	int count;
 
 	i = 0;
-	w = 0;
+	sym = 0;
+	count = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
-		if ((s[i + 1] == c || s[i + 1] == '\0') && s[i] != c)
-			w++;
-		i++;
-	}
-	return (w);
-}
-
-static char			**ssm(char **ss, int *t, char *x, char c)
-{
-	while (x[t[1]])
-	{
-		while (x[t[1]] == c && x[t[1]])
-			t[1]++;
-		if (x[t[1]] != '\0')
+		while (s[i] != c && s[i])
 		{
-			t[2] = 0;
-			if ((ss[t[0]] = malloc(sizeof(char) * (len(x, t[1], c) + 1)))
-					== NULL)
-				return (NULL);
-			while (x[t[1]] != c && x[t[1]])
-				ss[t[0]][t[2]++] = x[t[1]++];
-			ss[t[0]++][t[2]] = '\0';
+			sym = 1;
+			i++;
+		}
+		while (s[i] == c && s[i])
+		{
+			count += sym;
+			sym = 0;
+			i++;
 		}
 	}
-	return (ss);
+	return (count + 2);
 }
 
-char				**ft_strsplit(char const *s, char c)
+static int	nbc(char *s, int i, char c)
 {
-	char	**ss;
-	char	*x;
-	int		t[3];
+	int count;
 
-	t[0] = 0;
-	t[1] = 0;
-	ss = NULL;
-	if (!s)
+	count = 0;
+	while (s[i] != c && s[i])
+	{
+		count++;
+		i++;
+	}
+	return (count + 1);
+}
+
+char		**ft_strsplit(const char *s, char c)
+{
+	char	**res;
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	j = 0;
+	s = ft_strtrimc(s, c);
+	if (!s || !(res = malloc(sizeof(char*) * nbw((char*)s, c))))
 		return (NULL);
-	if ((x = ft_strtrim_2((char*)s, c)) == NULL)
-		return (NULL);
-	if ((ss = malloc(sizeof(ss) * wcount(x, c) + 1)) == NULL)
-		return (NULL);
-	ss = ssm(ss, t, x, c);
-	ss[t[0]] = NULL;
-	return (ss);
+	while (s[i])
+	{
+		k = 0;
+		if (!(res[j] = malloc(sizeof(c) * nbc((char*)s, i, c))))
+			return (NULL);
+		while (s[i] != c && s[i])
+			res[j][k++] = s[i++];
+		while (s[i] == c && s[i])
+			i++;
+		res[j++][k] = '\0';
+	}
+	res[j] = NULL;
+	return (res);
 }

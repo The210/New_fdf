@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 16:55:41 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/09 16:59:15 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/09/05 16:37:52 by ybouzgao          #+#    #+#             */
+/*   Updated: 2017/12/12 17:43:50 by ybouzgao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+int		ft_is_prime(int nb)
 {
 	int i;
+	int j;
 
-	i = 0;
-	while (n > 0)
+	if (nb <= 0 || nb == 1)
+		return (0);
+	i = 2;
+	j = 0;
+	while (i * i <= nb)
 	{
-		((char *)s)[i] = 0;
-		i++;
-		n--;
+		j = nb % i;
+		if (j == 0)
+			return (0);
+		else
+			i++;
 	}
+	return (1);
 }
