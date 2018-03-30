@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 21:57:41 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/14 14:25:10 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/11/09 21:58:01 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/14 14:09:42 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,27 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*s3;
+	char	*str;
 	int		i;
 	int		j;
 
+	str = "";
 	i = -1;
-	j = -1;
-	s3 = "";
-	if (s1 && s2)
+	j = 0;
+	if (s1 != NULL && s2 != NULL)
 	{
-		s3 = ft_strnew(ft_strlen((char *)s1) + ft_strlen((char *)s2));
-		if (s3 == NULL)
+		str = ft_strnew(ft_strlen((char *)s1) + ft_strlen((char *)s2));
+		if (str == NULL)
 			return (NULL);
 		while (s1[++i])
-			s3[i] = s1[i];
-		while (s2[++j])
+			str[i] = s1[i];
+		while (s2[j])
 		{
-			s3[i] = s2[j];
+			str[i] = s2[j];
+			j++;
 			i++;
 		}
-		s3[i] = '\0';
+		str[i] = '\0';
 	}
-	return (s3);
+	return (str);
 }

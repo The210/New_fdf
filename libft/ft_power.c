@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 19:04:19 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/09 21:19:48 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/11/12 15:13:33 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/12 15:14:07 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 float	ft_power(float a, int n)
 {

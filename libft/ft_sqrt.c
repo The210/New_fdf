@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/06 14:53:21 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/14 18:42:41 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/09/05 15:05:24 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/15 16:48:12 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_sqrt(int nb)
+int	ft_sqrt(int nb)
 {
 	int a;
-	int b;
 
 	a = 0;
-	b = 0;
-	while ((a * a) <= nb)
-	{
-		if ((a * a) == nb)
-			b = a;
+	while ((a * a) < nb && a <= 46341)
 		a++;
-	}
-	return (b);
+	if ((a * a) == nb)
+		return (a);
+	else
+		return (0);
 }

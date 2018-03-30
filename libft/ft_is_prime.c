@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_prime.c                                      :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/05 16:37:52 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/12/12 17:43:50 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/09/05 15:05:24 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/09/09 11:38:29 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int		ft_is_prime(int nb)
+int	ft_is_prime(int nb)
 {
-	int i;
-	int j;
+	int a;
+	int b;
 
-	if (nb <= 0 || nb == 1)
-		return (0);
-	i = 2;
-	j = 0;
-	while (i * i <= nb)
+	a = 2;
+	b = 0;
+	if (nb <= 1)
+		b = 1;
+	while ((a * a) <= nb)
 	{
-		j = nb % i;
-		if (j == 0)
-			return (0);
-		else
-			i++;
+		if (nb % a == 0)
+			b = 1;
+		a++;
 	}
-	return (1);
+	if (b == 0)
+		return (1);
+	else
+		return (0);
 }

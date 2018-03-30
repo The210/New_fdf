@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:35:20 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/13 18:28:50 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/11/07 15:36:24 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/13 18:30:06 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 16:34:04 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/07 16:35:38 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/11/09 13:31:18 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/09 13:31:19 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
-	if ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58))
+	if ((c >= '0' && c <= '9') ||
+		(c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
 	else
 		return (0);

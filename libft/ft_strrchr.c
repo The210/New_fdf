@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybouzgao <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 18:15:19 by ybouzgao          #+#    #+#             */
-/*   Updated: 2017/11/09 17:24:42 by ybouzgao         ###   ########.fr       */
+/*   Created: 2017/11/09 13:27:00 by dhorvill          #+#    #+#             */
+/*   Updated: 2017/11/09 17:27:03 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*ft_strrchr(const char *s, int c)
 	int		i;
 	char	*s1;
 
-	s1 = (char *)s;
 	i = 0;
+	s1 = (char *)s;
 	while (s1[i])
 		i++;
 	while (i >= 0)
