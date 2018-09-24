@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/30 17:18:51 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 17:18:55 by dhorvill         ###   ########.fr       */
+/*   Created: 2018/06/05 15:48:45 by dhorvill          #+#    #+#             */
+/*   Updated: 2018/06/08 22:27:54 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin2(char const *s1, char const *s2)
+char	*ft_strjoin2(char *s1, char *s2)
 {
 	char	*ss;
 
@@ -24,5 +24,6 @@ char	*ft_strjoin2(char const *s1, char const *s2)
 	ft_strcat(ss, s2);
 	ss[ft_strlen(s1) + ft_strlen(s2)] = ' ';
 	ss[ft_strlen(s1) + ft_strlen(s2) + 2] = '\0';
+	ft_strdel(&s1);
 	return (ss);
 }

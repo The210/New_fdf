@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/30 15:11:05 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 17:17:49 by dhorvill         ###   ########.fr       */
+/*   Created: 2018/06/05 17:36:12 by dhorvill          #+#    #+#             */
+/*   Updated: 2018/06/05 17:36:13 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,31 @@
 
 int			num_len(char *map, char c)
 {
-	int i;
+	int i[3];
 	int sym;
-	int count;
 
-	i = 0;
+	i[0] = 0;
+	i[1] = 0;
 	sym = 0;
-	count = 0;
+	i[2] = 0;
 	map = ft_strtrimc(map, ' ');
-	while (map[i])
+	while (map[i[0]])
 	{
-		while (map[i] && map[i] != c)
+		while (map[i[0]] && map[i[0]] != c)
 		{
 			sym = 1;
-			i++;
+			i[0]++;
+			i[1] = 1;
 		}
-		while (map[i] && map[i] == c)
+		while (map[i[0]] && map[i[0]] == c)
 		{
-			count += sym;
+			i[2] += sym;
 			sym = 0;
-			i++;
+			i[0]++;
 		}
 	}
-	return (count + 1);
+	ft_strdel(&map);
+	return (i[2] + i[1]);
 }
 
 t_matrix	get_lines_init(char *argv, t_matrix matrix)

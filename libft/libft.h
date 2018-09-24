@@ -6,7 +6,7 @@
 /*   By: dhorvill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 20:12:14 by dhorvill          #+#    #+#             */
-/*   Updated: 2018/03/30 18:29:02 by dhorvill         ###   ########.fr       */
+/*   Updated: 2018/06/08 22:28:47 by dhorvill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-char				*ft_strjoin2(char const *s1, char const *s2);
+char				*ft_strjoin2(char *s1, char *s2);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 int					ft_isalnum(int c);
